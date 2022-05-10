@@ -36,7 +36,9 @@ int solve(string & exp, int i, int j, bool isTrue, vector<vector<vector<int>>>& 
     if(dp[i][j][isTrue] != -1)
         return dp[i][j][isTrue];
 
-    int res = 0;
+    int res = 0;d
+
+    int mod = 1003;
 
     for(int k = i + 1; k < j; k = k + 2)
     {
@@ -50,15 +52,15 @@ int solve(string & exp, int i, int j, bool isTrue, vector<vector<vector<int>>>& 
         if(exp[k] == '&')
         {
             if(isTrue == 1)
-                res += left_true * right_true;
+                res += (left_true * right_true) % mod ;
             else
-                res += left_true * right_false + left_false * right_true + left_false * right_false;            
+                res += (left_true * right_false) % mod + (left_false * right_true) % mod + (left_false * right_false) % mod;            
         }
 
         if(exp[k] == '|')
         {
             if(isTrue == 1)
-                res += left_true * right_false + left_false * right_true + left_true * right_true;
+                res += (left_true * right_false) % mod + (left_false * right_true) % mod + (left_true * right_true) % mod;
             else
                 res += left_false * right_false;
         }
@@ -66,12 +68,12 @@ int solve(string & exp, int i, int j, bool isTrue, vector<vector<vector<int>>>& 
         if(exp[k] == '^')
         {
             if(isTrue == 1)
-                res += left_true * right_false + left_false * right_true;
+                res += (left_true * right_false) % mod + (left_false * right_true) % mod;
             else
-                res += left_true * right_true + left_false * right_false;
+                res += (left_true * right_true) % mod + (left_false * right_false) % mod;
         }
     }
-    return dp[i][j][isTrue] = res;
+    return dp[i][j][isTrue] = res % mod;
 }
 
 int evaluateExp(string & exp)
