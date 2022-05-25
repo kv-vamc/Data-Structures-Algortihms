@@ -7,6 +7,7 @@ You are given a 2D array of size N*3 ‘POINTS’ with the points corresponding 
 For Example
 If the given ‘POINTS’ array is [[1,2,5], [3 ,1 ,1] ,[3,3,3] ],the answer will be 11 as 5 + 3 + 3.
 */
+
 #include <bits/stdc++.h>
 int ninjaTraining(int n, vector<vector<int>> &points)
 {
